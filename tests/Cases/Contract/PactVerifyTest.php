@@ -52,7 +52,7 @@ class PactVerifyTest extends KernelTestCase
         return (new Broker())
             ->setUrl(new Uri(getenv('PACT_BROKER_URL')))
             ->setEnablePending(true)
-            ->setProviderBranch('main')
+            ->setProviderBranch(exec('git rev-parse --abbrev-ref HEAD'))
             ->setConsumerVersionSelectors($selectors);
     }
 
@@ -73,7 +73,7 @@ class PactVerifyTest extends KernelTestCase
     private function getCIConfig(): PublishOptions
     {
         return (new PublishOptions())
-                ->setProviderVersion('043f162')
-                ->setProviderBranch('main');
+                ->setProviderVersion(exec('git rev-parse --short HEAD'))
+                ->setProviderBranch(exec('git rev-parse --abbrev-ref HEAD'));
     }
 }
