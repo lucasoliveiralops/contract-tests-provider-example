@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  app:
+    container_name: ms-user
+    build: ./
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "9001:8080"
+    networks:
+      bubble:
+
+  database:
+    container_name: user-database
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
+      POSTGRES_USER: ${POSTGRES_USER:-root}
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
+    networks:
+      bubble:
+
+networks:
+  bubble:
+    external: true
+
+volumes:
+  database_data:
