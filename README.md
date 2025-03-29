@@ -2,7 +2,7 @@
 
 Este repositório exemplifica a implementação de testes de contrato do lado do **provedor** utilizando Pact-PHP, garantindo que sua API atenda aos contratos definidos pelos consumidores.
 
-## 🛠 Stack Tecnológica
+## 🛠 Stack
 
 - **Symfony** (Estrutura base)
 - **Pact-PHP** (Validação de contratos)
