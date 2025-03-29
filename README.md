@@ -1,54 +1,77 @@
-# Exemplo de Testes de Contrato com Pact-PHP
+# 🏗 Testes de Contrato com Pact-PHP (Lado Provedor)
 
-Este repositório é um exemplo de testes de contrato utilizando **Pact** com **PHP**. Ele demonstra a implementação de testes do lado do **provedor**.
+Este repositório exemplifica a implementação de testes de contrato do lado do **provedor** utilizando Pact-PHP, garantindo que sua API atenda aos contratos definidos pelos consumidores.
 
-## Tecnologias Utilizadas
+## 🛠 Stack Tecnológica
 
-- **Symfony** (Apenas para montar a estrutura base do projeto)
-- **Pact-PHP**
-- **PHPUnit**
-- **Pact Broker** (para publicação dos contratos)
+- **Symfony** (Estrutura base)
+- **Pact-PHP** (Validação de contratos)
+- **PHPUnit** (Framework de testes)
+- **Pact Broker** (Gerenciamento centralizado)
 
-## Estrutura do Projeto
+## 🔍 Visão Geral da Implementação
 
-O projeto segue a seguinte estrutura:
+### Conceitos Fundamentais
 
+**📌 Teste de Contrato (CDC)**  
+Consumer-Driven Contracts: abordagem onde os consumidores definem as expectativas do contrato (requests/responses esperados) que o provedor deve cumprir.
+
+**📌 Pact**  
+Arquivo JSON que documenta:
+- As interações esperadas (requests/responses)
+- Os cenários de teste
+- Metadados sobre consumidor/provedor
+
+**📌 Pact Broker**  
+Serviço que:
+- Armazena e versiona contratos (pacts)
+- Fornece dashboard para visualização
+- Gerencia matriz de compatibilidade entre consumidores/provedores
+
+### Papel do Provedor
+
+Em testes CDC (Consumer-Driven Contracts), o provedor:
+- 1\. Busca os pactos publicados no Broker
+- 2\. Valida se suas implementações atendem aos contratos
+- 3\. Garante compatibilidade com todos consumidores
+
+- Para conferir como a validação é feita no lado do consumidor acesse: [ 🔗 Consumidor de Exemplo](https://github.com/lucasoliveiralops/contract-tests-consumer-example)
+
+## 🧪 Testes do Provedor
+
+### ⚙️ Estrutura de Arquivos
+
+```plaintext
+tests/
+└── Cases/
+    └── Contract/
+        ├── FakeServer/          # Servidor mock para simulação
+        ├── PactManager.php      # Gerenciador de estados do contrato
+        └── PactVerifyTest.php   # Teste principal de verificação
 ```
-ms-user/
-├── src/                  # Código fonte da aplicação
-├── tests/                # Testes de contrato
-│   ├── ProviderTest.php  # Testes do lado do provedor
-├── pact/                 # Arquivos gerados pelo Pact
-├── composer.json         # Dependências do projeto
-├── README.md             # Documentação do projeto
+
+
+## 🚀 Instalação e Execução
+
+### Pré-requisitos
+- Docker
+- Docker Compose
+
+### Passo a Passo
+
+```bash
+# 1. Clonar o repositório
+git clone https://github.com/lucasoliveiralops/contract-tests-provider-example.git
+cd contract-tests-provider-example
+
+# 2. Iniciar containers
+docker compose up -d --build
+
+# 3. Executar testes
+docker exec -it ms-user sh -c "./vendor/bin/phpunit"
 ```
 
-## Instalação e Uso
 
-Para rodar o projeto localmente, siga os passos abaixo:
+## 🤝 Contribuição
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/lucasoliveiralops/contract-tests-provider-example.git
-   cd contract-tests-provider-example
-   ```
-2. Iniciando o container docker:
-   ```bash
-   docker compose up -d --build
-   ```
-3. Rode os testes:
-   ```bash
-   docker exec -it ms-user sh
-   ./vendor/bin/phpunit 
-   ```
-
-## Publicação no Pact Broker
-
-Os testes do lado do provedor são publicados automaticamente.
-
-## Contribuição
-
-Fique à vontade para abrir **issues** e **pull requests** para melhorias no projeto!
-
-Este projeto tem como objetivo demonstrar uma implementação simples e funcional de testes de contrato no PHP! 😃
-
+Abra uma issue ou envie um pull request! Este projeto tem como objetivo facilitar a adoção de testes de contrato em PHP. 🚀
